@@ -1,32 +1,32 @@
-DROP SCHEMA IF EXISTS tp CASCADE;
-CREATE SCHEMA tp;
+DROP SCHEMA IF EXISTS shotbase CASCADE;
+CREATE SCHEMA shotbase;
 
 --------------------------------------------------------------
--- Types d Attaques
+-- Table admin
 --------------------------------------------------------------
 
-DROP TABLE IF EXISTS tp.attack_type CASCADE ;
-CREATE TABLE tp.attack_type (
-    id_attack_type serial PRIMARY KEY,
-    attack_type_name text UNIQUE NOT NULL,
-    attack_type_description text NOT NULL
+DROP TABLE IF EXISTS shotbase.admin CASCADE ;
+CREATE TABLE shotbase.admin (
+    id_admin serial PRIMARY KEY,
+    identifiant_admin VARCHAR(50) UNIQUE NOT NULL,
+    mot_passe CHAR(10) UNIQUE NOT NULL
 );
 
 
 --------------------------------------------------------------
--- Attaques
+-- PARTICIPANTS
 --------------------------------------------------------------
 
-DROP TABLE IF EXISTS tp.attack;
+DROP TABLE IF EXISTS shotbase.participants CASCADE ;
 
-CREATE TABLE tp.attack (
-    id_attack SERIAL PRIMARY KEY,
-    id_attack_type integer REFERENCES tp.attack_type(id_attack_type),
-    power integer,
-    accuracy integer,
-    element text,
-    attack_name text UNIQUE NOT NULL,
-    attack_description text
+CREATE TABLE tp.participants (
+    id_participant SERIAL PRIMARY KEY,
+    email VARCHAR(50) UNIQUE NOT NULL,
+    nom VARCHAR(50) NOT NULL,
+    prenoms VARCHAR(100) NOT NULL,
+    date_creation_compte DATE,
+    etudiant_ensai BOOLEAN UNIQUE NOT NULL,
+    mot_passe_client CHAR(10) UNIQUE NOT NULL
 );
 
 
